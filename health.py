@@ -1,3 +1,6 @@
 import numpy as np
-print(np.loadtxt(fname='data/inflammation-01.csv', delimiter=','))
-
+data = np.loadtxt(fname='data/inflammation-01.csv', delimiter=',')
+maxval, minval, stdval = np.max(data), np.min(data), np.std(data)
+print('maximum:', maxval)
+print('minimum:', minval)
+print('standard deviation:', stdval)
