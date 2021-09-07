@@ -1,22 +1,42 @@
 import numpy as np
 import matplotlib.pyplot as plt
-data = np.loadtxt(fname='data/inflammation-01.csv', delimiter=',')
+import glob
 
-fig = plt.figure(figsize=(10.0, 3.0))
+def visualize(filename):
 
-axes1 = fig.add_subplot(1, 3, 1)
-axes2 = fig.add_subplot(1, 3, 2)
-axes3 = fig.add_subplot(1, 3, 3)
+    data = np.loadtxt(fname=filename, delimiter=',')
 
-axes1.set_ylabel('average')
-axes1.plot(np.mean(data, axis=0), drawstyle='steps-mid')
+    fig = plt.figure(figsize=(10.0, 3.0))
 
-axes2.set_ylabel('max')
-axes2.plot(np.max(data, axis=0), drawstyle='steps-mid')
+    axes1 = fig.add_subplot(1, 3, 1)
+    axes2 = fig.add_subplot(1, 3, 2)
+    axes3 = fig.add_subplot(1, 3, 3)
 
-axes3.set_ylabel('min')
-axes3.plot(np.min(data, axis=0), drawstyle='steps-mid')
+    axes1.set_ylabel('average')
+    axes1.plot(np.mean(data, axis=0), drawstyle='steps-mid')
 
-fig.tight_layout()
+    axes2.set_ylabel('max')
+    axes2.plot(np.max(data, axis=0), drawstyle='steps-mid')
 
-plt.show()
+    axes3.set_ylabel('min')
+    axes3.plot(np.min(data, axis=0), drawstyle='steps-mid')
+
+    fig.tight_layout()
+
+    plt.show()
+
+def finderrors(filename):
+
+    data = np.loadtxt(fname=filename, delimiter=',')
+    max_d0 = np.max(data, axis=0)[0]
+    max_d20 = np.max(data, axis=0)[20]
+
+    if max_d0 == 0 and max_d20 == 20:
+        print('Suspicious looking maxima!')
+    elif np.sum(np.min(data, axis=0)) == 0:
+        print('Minima add up to zero!')
+    else:
+        print('Seems OK!')
+
+# visualize('data\inflammation-01.csv')
+finderrors('data\inflammation-01.csv')
