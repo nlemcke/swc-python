@@ -39,4 +39,20 @@ def finderrors(filename):
         print('Seems OK!')
 
 # visualize('data\inflammation-01.csv')
-finderrors('data\inflammation-01.csv')
+# finderrors('data\inflammation-01.csv')
+
+def offset_mean(data, target_mean_value):
+    """Return a new array containing the original data
+       with its mean offset to match the desired value.
+    Examples
+    --------
+    >>> offset_mean([1, 2, 3], 0)
+    array([-1., 0., 1.])
+    """
+    return (data - np.mean(data)) + target_mean_value
+
+data = np.loadtxt(fname='data\inflammation-01.csv', delimiter=',')
+
+# print(offset_mean(data, 0))
+help(offset_mean)
+
