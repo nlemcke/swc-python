@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import glob
 
-def visualize(filename):
+data = np.loadtxt('data\inflammation-01.csv', delimiter=',')
 
-    data = np.loadtxt(fname=filename, delimiter=',')
+def visualize(filename):
 
     fig = plt.figure(figsize=(10.0, 3.0))
 
@@ -27,7 +27,6 @@ def visualize(filename):
 
 def finderrors(filename):
 
-    data = np.loadtxt(fname=filename, delimiter=',')
     max_d0 = np.max(data, axis=0)[0]
     max_d20 = np.max(data, axis=0)[20]
 
@@ -38,10 +37,10 @@ def finderrors(filename):
     else:
         print('Seems OK!')
 
-# visualize('data\inflammation-01.csv')
-# finderrors('data\inflammation-01.csv')
+# visualize(data)
+# finderrors(data)
 
-def offset_mean(data, target_mean_value):
+def offset_mean(data, target_mean_value=0):
     """Return a new array containing the original data
        with its mean offset to match the desired value.
     Examples
@@ -51,8 +50,6 @@ def offset_mean(data, target_mean_value):
     """
     return (data - np.mean(data)) + target_mean_value
 
-data = np.loadtxt(fname='data\inflammation-01.csv', delimiter=',')
 
 # print(offset_mean(data, 0))
-help(offset_mean)
 
